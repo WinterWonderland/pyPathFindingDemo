@@ -76,7 +76,7 @@ class Board:
                                (x, y - 1))
 
         for x, y in all_connected_tiles:
-            if x > 0 and x < self._number_of_tiles_x - 2 and y > 0 and y < self._number_of_tiles_y - 2:
+            if x > 0 and x < self._number_of_tiles_x - 1 and y > 0 and y < self._number_of_tiles_y - 1:
                 if self._tiles[x][y] == TileType.empty or self._tiles[x][y] == TileType.end:
                     node_list.append((x, y))
 
