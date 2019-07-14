@@ -1,7 +1,8 @@
 import sys
+import random
+from enum import Enum
 from itertools import product
 import contextlib
-import random
 with contextlib.redirect_stdout(None):
     import pygame
 
@@ -19,8 +20,21 @@ wall_tile = pygame.image.load(r"Textures\TileBlack.png").convert()
 start_tile = pygame.image.load(r"Textures\TileStart.png").convert()
 end_tile = pygame.image.load(r"Textures\TileEnd.png").convert()
 
+class TileType(Enum):
+    empty = 0,
+    wall = 1,
+    start = 2,
+    end = 3
+    
+tile_mapping = {TileType.empty: empty_tile,
+                TileType.wall: wall_tile,
+                TileType.start: start_tile,
+                TileType.end: end_tile}
+
 number_of_tiles_x = int(width / empty_tile.get_width())
 number_of_tiles_y = int(height / empty_tile.get_height())
+
+board = [[None for _ in range(number_of_tiles_y)] for _ in range(number_of_tiles_x)]
 
 for x, y in product(range(number_of_tiles_x), range(number_of_tiles_y)):
     if x == 0 or \
@@ -28,26 +42,27 @@ for x, y in product(range(number_of_tiles_x), range(number_of_tiles_y)):
             x == number_of_tiles_x - 1 or \
             y == number_of_tiles_y - 1 or \
             random.random() < percentage_of_wall_fields:
-        screen.blit(wall_tile, 
-                    wall_tile.get_rect().move(x * wall_tile.get_width(), 
-                                              y * wall_tile.get_height()))
+        board[x][y] = TileType.wall
     else:
-        screen.blit(empty_tile, 
-                    empty_tile.get_rect().move(x * empty_tile.get_width(), 
-                                               y * empty_tile.get_height()))
+        board[x][y] = TileType.empty
 
-screen.blit(start_tile, 
-            start_tile.get_rect().move(random.randint(1, number_of_tiles_x - 1) * start_tile.get_width(), 
-                                       random.randint(1, number_of_tiles_y - 1) * start_tile.get_height()))
-
-screen.blit(end_tile, 
-            end_tile.get_rect().move(random.randint(1, number_of_tiles_x - 1) * end_tile.get_width(), 
-                                     random.randint(1, number_of_tiles_y - 1) * end_tile.get_height()))
-
+board[random.randint(1, number_of_tiles_x - 2)][random.randint(1, number_of_tiles_y - 2)] = TileType.start
+board[random.randint(1, number_of_tiles_x - 2)][random.randint(1, number_of_tiles_y - 2)] = TileType.end
+                     
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+
+    screen.fill([0, 255, 255])
+            
+    for x, y in product(range(number_of_tiles_x), range(number_of_tiles_y)):
+        tile = tile_mapping[board[x][y]]
+        
+        if tile:
+            screen.blit(tile, 
+                        tile.get_rect().move(x * tile.get_width(), 
+                                             y * tile.get_height())) 
 
     pygame.display.flip()
     clock.tick(fps)
