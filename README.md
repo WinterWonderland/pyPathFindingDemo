@@ -15,6 +15,7 @@ A pygame window will be created with the given size and will be splittet into 16
 There are different kind of tiles:
 
 Texture | Name | Description
+--- | --- | ---
 ![alt text](Textures/TileWhite.png "TileWhite") | empty | this fields can be entered
 ![alt text](Textures/TileBlack.png "TileBlack") | wall | this fields can not be entered
 ![alt text](Textures/TileStart.png "TileStart") | start | this field is the start for the path
@@ -40,6 +41,7 @@ The optimization strategy can be choosen by a parameter.
 Optimization strategies:
 
 Name | Description | Result | Time consumption
+--- | --- | --- | ---
 breadth first | continue the search at the shortest path until now | finds the shortest path | high
 depth first | continue the search at the longest path until now | finds a random path | random
 greedy | continue the search at the shortest distance (straight line) to the destination | finds mostly a short path | mostly low
@@ -60,6 +62,7 @@ Easiest call of the script with all parameters set to its defaults: `python pyPa
 
 #### Optional Parameters
 Name | Description
+--- | ---
 `-h` | show this help message and exit
 `--width` | The width of the game window (minimum=32, default=1920 [Full HD])
 `--height` | The width of the game window (minimum=32, default=1080 [Full HD])
@@ -69,5 +72,6 @@ Name | Description
 
 ### Dependencies
 Package | Tested version
+--- | ---
 python | 3.7
 pygame | 1.9.6
