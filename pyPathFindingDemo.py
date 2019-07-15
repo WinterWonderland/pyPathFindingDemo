@@ -2,6 +2,7 @@ import random
 from enum import Enum
 from itertools import product
 from operator import attrgetter
+from argparse import ArgumentParser, RawTextHelpFormatter
 import contextlib
 with contextlib.redirect_stdout(None):
     import pygame
@@ -210,9 +211,53 @@ class TreeSearch:
 
 
 if __name__ == "__main__":
-    board = Game(width=1920,  # Full HD
-                 height=1080, 
-                 percentage_of_wall_fields=1 / 3, 
-                 fps=25,
-                 optimization=TreeSearch.SearchOptimization.greedy)
+    argument_parser = ArgumentParser(description="""
+pyPathFindingDemo:
+    - pyPathFindingDemo is a little python program which implements some tree search algorithms to solve a path finding problem visualized with the pygame framework.
+    - Create a randomly generated playground with walls, start and end point and search a path from start to end with the given optimization strategy.
+    - See readme.md for more informations.""", 
+                                     epilog="https://github.com/WinterWonderland/pyPathFindingDemo",
+                                     formatter_class=RawTextHelpFormatter)
+    argument_parser.add_argument("--width",
+                                 metavar="",
+                                 type=int,
+                                 default=1920,
+                                 help="The width of the game window (minimum=32, default=1920 [Full HD])")
+    argument_parser.add_argument("--height",
+                                 metavar="",
+                                 type=int,
+                                 default=1080,
+                                 help="The width of the game window (minimum=32, default=1080 [Full HD])")
+    argument_parser.add_argument("--walls",
+                                 metavar="",
+                                 type=float,
+                                 default=1 / 3,
+                                 help="Percentage of wall tiles to generate (minimum=0, maximum=1, default=1/3)")
+    argument_parser.add_argument("--fps",
+                                 metavar="",
+                                 type=int,
+                                 default=25,
+                                 help="The target frames per second to run the simulation (default=25)")
+    argument_parser.add_argument("--optimization",
+                                 metavar="",
+                                 type=str,
+                                 choices=("breadth", "depth", "greedy", "a_star"),
+                                 default="a_star",
+                                 help="The optimization strategy for the search algorithm [breadth, depth, greedy, a_star] (default=a_star)")
+    args = argument_parser.parse_args()
+    
+    if args.optimization == "breadth":
+        optimization = TreeSearch.SearchOptimization.breadth_first
+    elif args.optimization == "depth":
+        optimization = TreeSearch.SearchOptimization.depth_first
+    elif args.optimization == "greedy":
+        optimization = TreeSearch.SearchOptimization.greedy
+    elif args.optimization == "a_star":
+        optimization = TreeSearch.SearchOptimization.a_star
+        
+    board = Game(width=args.width,
+                 height=args.height, 
+                 percentage_of_wall_fields=args.walls, 
+                 fps=args.fps,
+                 optimization=optimization)
     board.run()
