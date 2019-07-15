@@ -8,7 +8,7 @@ pyPathFindingDemo is a little python program which implements some tree search a
 
 ### Description
 
-##### Game board
+#### Game board
 At the beginning the game board will be generated. 
 A pygame window will be created with the given size and will be splittet into 16x16 pixel sized tiles.
 
@@ -29,7 +29,7 @@ The ratio between empty fields and walls can be affected by a parameter.
 
 The start field and the end field will be placed at random positions. 
 
-##### Search
+#### Search
 The path finding runs in steps. 
 The duration of a step can be affected by a parameter.
  
@@ -45,7 +45,7 @@ depth first | continue the search at the longest path until now | finds a random
 greedy | continue the search at the shortest distance (straight line) to the destination | finds mostly a short path | mostly low
 A* | continue the search at the lowest sum of the path until now and the distance to the destination (straight line) | finds the shortest path | middle
 
-##### End
+#### End
 If a path was found it will be marked.
 The simulation will be stopped so you can study the result.
 
@@ -53,12 +53,12 @@ The window must be closed manually at the end.
 
 
 ### Usage
-##### Call
+#### Call
 Syntax: `pyPathFindingDemo.py [-h] [--width] [--height] [--walls] [--fps] [--optimization]`
 
 Easiest call of the script with all parameters set to its defaults: `python pyPathFindingDemo.py`
 
-##### Optional Parameters
+#### Optional Parameters
 Name | Description
 `-h` | show this help message and exit
 `--width` | The width of the game window (minimum=32, default=1920 [Full HD])
