@@ -9,7 +9,8 @@ pyPathFindingDemo is a little python program which implements some tree search a
 ### Description
 
 #### Game board
-At the beginning the game board will be generated. 
+At the beginning the game board will be generated.
+If you want a reproducible game board you can set a seed for the random number generator by a parameter.  
 A pygame window will be created with the given size and will be splittet into 16x16 pixel sized tiles.
 
 There are different kind of tiles:
@@ -69,6 +70,7 @@ Name | Description
 `--walls` | Percentage of wall tiles to generate (minimum=0, maximum=1, default=1/3)
 `--fps` | The target frames per second to run the simulation (default=25)
 `--optimization` | The optimization strategy for the search algorithm [breadth, depth, greedy, a\_star] (default=a\_star)
+`--seed` | A seed for the random number generator to get identical play boards
 
 ### Dependencies
 Package | Tested version

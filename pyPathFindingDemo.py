@@ -18,7 +18,8 @@ class Game:
         closed = 5
         path = 6
     
-    def __init__(self, width, height, percentage_of_wall_fields, fps, optimization):
+    def __init__(self, width, height, percentage_of_wall_fields, fps, optimization, seed):
+        random.seed(seed)
         pygame.init()
         pygame.display.set_caption("pyPathFindingDemo")
         
@@ -245,6 +246,11 @@ pyPathFindingDemo:
                                  choices=("breadth", "depth", "greedy", "a_star"),
                                  default="a_star",
                                  help="The optimization strategy for the search algorithm [breadth, depth, greedy, a_star] (default=a_star)")
+    argument_parser.add_argument("--seed",
+                                 metavar="",
+                                 type=int,
+                                 default=None,
+                                 help="A seed for the random number generator to get identical play boards")
     args = argument_parser.parse_args()
     
     if args.optimization == "breadth":
@@ -260,5 +266,6 @@ pyPathFindingDemo:
                  height=args.height, 
                  percentage_of_wall_fields=args.walls, 
                  fps=args.fps,
-                 optimization=optimization)
+                 optimization=optimization,
+                 seed=args.seed)
     board.run()
