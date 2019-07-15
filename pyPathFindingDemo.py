@@ -20,6 +20,7 @@ class Game:
     
     def __init__(self, width, height, percentage_of_wall_fields, fps, optimization):
         pygame.init()
+        pygame.display.set_caption("pyPathFindingDemo")
         
         self._size = self._width, self._height = width, height
         self._fps = fps
