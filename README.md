@@ -66,7 +66,7 @@ Name | Description
 --- | ---
 `-h` | show this help message and exit
 `--width` | The width of the game window (minimum=32, default=1920 [Full HD])
-`--height` | The width of the game window (minimum=32, default=1080 [Full HD])
+`--height` | The height of the game window (minimum=32, default=1080 [Full HD])
 `--walls` | Percentage of wall tiles to generate (minimum=0, maximum=1, default=1/3)
 `--fps` | The target frames per second to run the simulation (default=25)
 `--optimization` | The optimization strategy for the search algorithm [breadth, depth, greedy, a\_star] (default=a\_star)
