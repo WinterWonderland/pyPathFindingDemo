@@ -244,7 +244,7 @@ pyPathFindingDemo:
                                  metavar="",
                                  type=str,
                                  choices=("breadth", "depth", "greedy", "a_star"),
-                                 default="a_star",
+                                 default="greedy",
                                  help="The optimization strategy for the search algorithm [breadth, depth, greedy, a_star] (default=a_star)")
     argument_parser.add_argument("--seed",
                                  metavar="",
